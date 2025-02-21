@@ -1,0 +1,1 @@
+# qubership-graylog-plugins-init
