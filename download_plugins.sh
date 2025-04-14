@@ -25,7 +25,7 @@ while IFS='' read -r line || [[ -n "${line}" ]]; do
             -r -nd --quiet --no-parent \
             "${line}"
     fi
-done < "plugins.list"
+done <"plugins.list"
 echo "Plugins successfully downloaded"
 
 echo "List of plugins directories:"
