@@ -1,7 +1,10 @@
 #!/bin/sh
 
-LOCAL_PLUGINS_DIR=/opt/plugins
-GRAYLOG_PLUGINS_DIR=/usr/share/graylog/plugins
+set -e
+
+LOCAL_PLUGINS_DIR=/opt/graylog/plugins
+# See https://github.com/Graylog2/graylog-docker/blob/main/docker-entrypoint.sh#L73
+GRAYLOG_PLUGINS_DIR=/usr/share/graylog/plugin
 
 echo "Start graylog-plugins-init container..."
 
