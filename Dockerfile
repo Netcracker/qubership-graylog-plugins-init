@@ -17,7 +17,7 @@ FROM alpine:3.21
 # User "nobody"
 ENV USER_UID=65534
 
-COPY --from=builder --chmod=${USER_UID} /tmp/plugins/ /opt/graylog/plugins
+COPY --from=builder --chown=${USER_UID} /tmp/plugins/ /opt/graylog/plugins
 COPY ./entrypoint.sh /entrypoint.sh
 
 RUN chmod +x /entrypoint.sh
