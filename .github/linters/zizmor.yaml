@@ -1,0 +1,18 @@
+rules:
+  dangerous-triggers:
+    ignore:
+      - cla.yaml
+      - pr-assigner.yml
+  secrets-outside-env:
+    ignore:
+      - automatic-pr-labeler.yaml
+      - build.yaml
+      - cla.yaml
+      - link-checker.yaml
+      - ossf-scorecard.yaml
+      - pr-conventional-commits.yaml
+      - pr-lint-title.yaml
+      - profanity-filter.yaml
+      - renovate-config-lint.yaml
+      - security-scan.yml
+      - super-linter.yaml
