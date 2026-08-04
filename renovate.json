@@ -1,0 +1,16 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "github>Netcracker/renovate-config:base",
+    "github>Netcracker/renovate-config:github-actions",
+    "github>Netcracker/renovate-config:netcracker-dependencies",
+    "github>Netcracker/renovate-config:graylog-plugins"
+  ],
+  "packageRules": [
+    {
+      "description": "Keep TelegramAlert compatible with Graylog 5",
+      "matchPackageNames": ["irgendwr/TelegramAlert"],
+      "allowedVersions": "<2.5.0"
+    }
+  ]
+}
