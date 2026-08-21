@@ -1,31 +1,43 @@
 #!/bin/bash
 
-set -e
+set -euo pipefail
 
 ######################################################################################################################
 #                                                      Constants                                                     #
 ######################################################################################################################
 
-TEMP_PATH="/tmp"
-DOWNLOADS_PATH="${TEMP_PATH}/plugins"
+readonly DOWNLOADS_PATH="${PLUGIN_DOWNLOADS_PATH:-/tmp/plugins}"
+readonly PLUGINS_FILE="${PLUGINS_FILE:-plugins.list}"
+readonly GITHUB_RELEASE_URL_PATTERN='^https://github\.com/[A-Za-z0-9_.-]+/[A-Za-z0-9_.-]+/releases/download/[^/?#[:space:]]+/[A-Za-z0-9_.+-]+\.jar$'
 
 ######################################################################################################################
 #                                                  Download plugins                                                  #
 ######################################################################################################################
 
-mkdir -p ${DOWNLOADS_PATH}
+mkdir -p "${DOWNLOADS_PATH}"
 
 echo "Start to read file with plugins ..."
 while IFS='' read -r line || [[ -n "${line}" ]]; do
-    if [[ "${line}" != \#* ]]; then
-        filename=$(basename "${line}")
+    if [[ -n "${line}" && "${line}" != \#* ]]; then
+        if [[ ! "${line}" =~ ${GITHUB_RELEASE_URL_PATTERN} ]]; then
+            echo "Unsupported plugin URL: ${line}" >&2
+            echo "Use an HTTPS JAR URL from a GitHub release." >&2
+            exit 1
+        fi
+
+        filename=$(basename -- "${line}")
 
         echo "Try to download plugin: ${filename} ..."
-        wget --no-check-certificate -P "${DOWNLOADS_PATH}/${filename}" \
-            -r -nd --quiet --no-parent \
+        wget --quiet \
+            --output-document "${DOWNLOADS_PATH}/${filename}" \
             "${line}"
+
+        if [[ ! -s "${DOWNLOADS_PATH}/${filename}" ]]; then
+            echo "Downloaded plugin is empty: ${filename}" >&2
+            exit 1
+        fi
     fi
-done <"plugins.list"
+done <"${PLUGINS_FILE}"
 echo "Plugins successfully downloaded"
 
 echo "List of plugins directories:"

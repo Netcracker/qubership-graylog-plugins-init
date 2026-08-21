@@ -6,6 +6,7 @@ COPY ./download_plugins.sh ./plugins.list /
 
 RUN apk add \
         bash \
+        ca-certificates \
         wget \
         unzip \
     && chmod +x /download_plugins.sh \
