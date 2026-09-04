@@ -21,14 +21,14 @@ while IFS='' read -r line || [[ -n "${line}" ]]; do
         filename=$(basename "${line}")
 
         echo "Try to download plugin: ${filename} ..."
-        wget --no-check-certificate -P "${DOWNLOADS_PATH}/${filename}" \
+        wget --no-check-certificate -P "${DOWNLOADS_PATH}" \
             -r -nd --quiet --no-parent \
             "${line}"
     fi
 done <"plugins.list"
 echo "Plugins successfully downloaded"
 
-echo "List of plugins directories:"
+echo "List of downloaded plugin files:"
 ls -lah "${DOWNLOADS_PATH}"
 
 echo "Plugins download process successfully complete"
