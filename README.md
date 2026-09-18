@@ -15,7 +15,7 @@ These plugins are downloaded while this image build instead of init container ru
 
 During build graylog-plugin-init container all plugins download from
 [https://github.com](https://github.com) (usually almost all Graylog plugins published on GitHub)
-and add into docker image.
+and add into Docker image.
 
 When operator create or update Graylog deployment it create deployment with two containers:
 
@@ -42,10 +42,11 @@ Structure of init image:
 
 ## How to add plugin
 
-There is file `plugins.list` which contains plugin link.
-Currently plugins can be download only from:
+The `plugins.list` file contains one plugin URL per line. Each URL must point to a JAR asset in a GitHub release over
+HTTPS. The image build rejects other hosts and verifies TLS certificates before downloading a plugin.
 
-* [https://community.graylog.org/c/marketplace/31](https://community.graylog.org/c/marketplace/31)
+Find available plugins in the [Graylog Marketplace](https://community.graylog.org/c/marketplace/31), then use the
+plugin project's GitHub release URL.
 
 Format:
 
