@@ -15,7 +15,7 @@ These plugins are downloaded while this image build instead of init container ru
 
 During build graylog-plugin-init container all plugins download from
 [https://github.com](https://github.com) (usually almost all Graylog plugins published on GitHub)
-and add into docker image.
+and add into Docker image.
 
 When operator create or update Graylog deployment it create deployment with two containers:
 
