@@ -25,6 +25,7 @@ jobs:
         uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6
         id: restore-cache
         with:
+          lookup-only: ${{ startsWith(github.ref, 'refs/tags/') }}
           path: .lycheecache
           key: cache-lychee-${{ github.sha }}
           restore-keys: cache-lychee-
